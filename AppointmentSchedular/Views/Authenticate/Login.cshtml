@@ -16,7 +16,7 @@
     @Scripts.Render("~/bundles/jqueryval")
     
     
-    @using (Html.BeginForm()) 
+    @using (Html.BeginForm("Login","Authenticate")) 
     {
         @Html.AntiForgeryToken()
         

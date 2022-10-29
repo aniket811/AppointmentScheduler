@@ -16,13 +16,13 @@ namespace AppointmentSchedular.Controllers
         // GET: Authenticate
         MVCEntity mvc = new MVCEntity();
         [HttpGet]
-        public ActionResult Signup()
+        public ActionResult Index()
         {
             
             return View("Signup");
         }
         [HttpPost,ValidateAntiForgeryToken]
-        public ActionResult Signup(MVCEntity pos)
+        public ActionResult Signup(Authentication pos)
         {
             if (!ModelState.IsValid)
             {
@@ -47,15 +47,15 @@ namespace AppointmentSchedular.Controllers
                 return View(model);
             }
             var user = from u in mvc.Authentications where u.username == model.username && u.passwords == model.passwords select u;
-            if (user.Count() > 0)
-            {
-                Session["Userkey"] = Guid.NewGuid().ToString();
-                return RedirectToAction("Index", "Home");
-            }
-            else
+            if (user.Count() ==0)
             {
                 ModelState.AddModelError("", "Invalid username or password");
                 return View(model);
+            }
+            else
+            {
+                Session["Userkey"] = Guid.NewGuid().ToString();
+                return RedirectToAction("Index", "Home");
             }
             //from u in mvc.Authentications where u.username == model.username && u.passwords == log.passwords select u;
         }
