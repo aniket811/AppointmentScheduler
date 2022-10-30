@@ -12,7 +12,7 @@ namespace AppointmentSchedular.Models
             
         }
 
-        public virtual DbSet<Authentication> Authentications { get; set; }
+        public  DbSet<Authentication> Authentications { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
